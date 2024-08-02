@@ -1,0 +1,45 @@
+<!--
+  @description       : 
+  @author            : Ahmed Abdelraouf
+  @group             : 
+  @last modified on  : 08-01-2024
+  @last modified by  : Ahmed Abdelraouf
+-->
+<apex:page controller="CustomerFeedbackController">
+    <apex:form>
+        <apex:pageBlock title="Customer Feedback">
+            <apex:pageBlockSection>
+                <apex:inputText value="{!searchQuery}" label="Search" />
+                <apex:commandButton value="Search" action="{!search}" reRender="customerTable, paginationSection" />
+            </apex:pageBlockSection>
+            <apex:pageBlockTable value="{!customers}" var="customer" id="customerTable">
+                <apex:column headerValue="Customer Name">
+                    <apex:outputText value="{!customer.customer.Name}" />
+                </apex:column>
+                <apex:column headerValue="Email">
+                    <apex:outputText value="{!customer.customer.Customer_Email__c}" />
+                </apex:column>
+                <apex:column headerValue="Feedbacks">
+                    <apex:dataTable value="{!customer.feedbacks}" var="feedback" rendered="{! AND(NOT(ISNULL(customer.feedbacks)),customer.feedbacksSize > 0)}">
+                        <apex:column headerValue="Date">
+                            <apex:outputText value="{!feedback.Date_Submitted__c}" />
+                        </apex:column>
+                        <apex:column headerValue="Status">
+                            <apex:outputText value="{!feedback.Status__c}" />
+                        </apex:column>
+                    </apex:dataTable>
+                    <apex:outputText value="No Feedback" rendered="{!ISNULL(customer.feedbacks) || customer.feedbacksSize == 0}" />
+                </apex:column>
+            </apex:pageBlockTable>
+
+            <apex:pageBlockSection id="paginationSection">
+                <apex:commandButton value="Previous" action="{!previousPage}" reRender="customerTable, paginationSection" disabled="{!pageNumber == 1}"
+                />
+                <apex:outputText value="Page {!pageNumber} of {!totalRecords}" />
+
+                <apex:commandButton value="Next" action="{!nextPage}" reRender="customerTable, paginationSection" disabled="{!pageNumber * pageSize >= totalRecords}"
+                />
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

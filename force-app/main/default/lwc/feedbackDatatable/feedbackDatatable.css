@@ -1,0 +1,7 @@
+p.error {
+  text-align: center;
+  color: red;
+}
+span.error {
+  font-weight: bold;
+}

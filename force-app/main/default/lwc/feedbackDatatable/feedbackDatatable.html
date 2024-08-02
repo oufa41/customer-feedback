@@ -1,0 +1,30 @@
+<!--
+  @description       : 
+  @author            : Ahmed Abdelraouf
+  @group             : 
+  @last modified on  : 08-02-2024
+  @last modified by  : Ahmed Abdelraouf
+-->
+<template>
+    <lightning-card title="Customer Feedback" icon-name="standard:feedback">
+        <div class="slds-m-bottom_medium">
+            <lightning-combobox label="Filter by Status" value={statusFilter} placeholder="Select Status"
+                options={statusOptions} onchange={handleStatusFilterChange}>
+            </lightning-combobox>
+        </div>
+        <template if:true={feedbacks}>
+            <lightning-datatable data={feedbacks} show-row-number-column row-number-offset={rowOffset}
+                hide-checkbox-column columns={columns} key-field="id" sorted-by={sortedBy}
+                sorted-direction={sortedDirection} onsort={handleSort} enable-infinite-loading
+                onloadmore={handleLoadMore} is-loading={isLoading}>
+            </lightning-datatable>
+        </template>
+        <template if:false={hasRecords}>
+            <p class="error">noRecordsMessage</p>
+        </template>
+        <template if:true={error}>
+
+            <lightning-helptext icon-name="utility:error" content={error}></lightning-helptext>
+        </template>
+    </lightning-card>
+</template>
