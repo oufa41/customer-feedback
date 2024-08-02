@@ -6,9 +6,9 @@
   @last modified by  : Ahmed Abdelraouf
 -->
 <apex:page controller="CustomerFeedbackController">
-    <apex:form>
+    <apex:form >
         <apex:pageBlock title="Customer Feedback">
-            <apex:pageBlockSection>
+            <apex:pageBlockSection >
                 <apex:inputText value="{!searchQuery}" label="Search" />
                 <apex:commandButton value="Search" action="{!search}" reRender="customerTable, paginationSection" />
             </apex:pageBlockSection>

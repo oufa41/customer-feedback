@@ -142,4 +142,4 @@ export default class FeedbackDatatable extends LightningElement {
         }
         return '';
     }
-} 
+}
