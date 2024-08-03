@@ -39,6 +39,8 @@
     <types>
 		<members>Customer__c</members>
 		<members>Feedback__c</members>
+        		<members>Notify_Internal_User__mdt</members>
+
 		<name>CustomObject</name>
 	</types>
     <version>61.0</version>
